@@ -16,7 +16,7 @@ export class AppComponent {
     this.term.valueChanges
       .debounceTime( 500 )
       .distinctUntilChanged()
-      .combineLatest( () => this.limit.valueChanges )
+      .combineLatest( this.limit.valueChanges )
       .switchMap( values => wiki.search( values[0], values[1] ) )
       .subscribe( result => this.items = result );
   }
