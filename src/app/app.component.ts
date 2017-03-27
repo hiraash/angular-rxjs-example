@@ -12,7 +12,9 @@ export class AppComponent {
   term: FormControl = new FormControl();
 
   constructor( wiki: WikipediaService ) {
-
+    this.term.valueChanges
+      .switchMap( val => wiki.search( val, 5 ) )
+      .subscribe( result => this.items = result );
   }
 
 }
