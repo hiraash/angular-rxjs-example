@@ -8,6 +8,6 @@
     <option value="20">20</option>
   </select>
   <ul>
-    <li *ngFor="let item of items">{{item}}</li>
+    <li *ngFor="let item of items | async">{{item}}</li>
   </ul>
 </div>

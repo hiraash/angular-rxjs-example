@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { WikipediaService } from './wikipedia.service';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  items: Array<string>;
+export class AppComponent implements AfterViewInit{
+  items: Observable<Array<string>>;
   term: FormControl = new FormControl();
   limit: FormControl = new FormControl();
 
   constructor( wiki: WikipediaService ) {
-    this.term.valueChanges
+    this.items = this.term.valueChanges
       .debounceTime( 500 )
       .distinctUntilChanged()
       .combineLatest( this.limit.valueChanges )
-      .switchMap( values => wiki.search( values[0], values[1] ) )
-      .subscribe( result => this.items = result );
+      .switchMap( values => wiki.search( values[0], values[1] ));
+  }
+
+  ngAfterViewInit() {
+    this.limit.setValue( 10 );
   }
 
 }
