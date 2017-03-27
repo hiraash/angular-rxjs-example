@@ -10,10 +10,14 @@ import { FormControl } from '@angular/forms';
 export class AppComponent {
   items: Array<string>;
   term: FormControl = new FormControl();
+  limit: FormControl = new FormControl();
 
   constructor( wiki: WikipediaService ) {
     this.term.valueChanges
-      .switchMap( val => wiki.search( val, 5 ) )
+      .debounceTime( 500 )
+      .distinctUntilChanged()
+      .combineLatest( () => this.limit.valueChanges )
+      .switchMap( values => wiki.search( values[0], values[1] ) )
       .subscribe( result => this.items = result );
   }
 
