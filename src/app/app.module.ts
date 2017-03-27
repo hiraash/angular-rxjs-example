@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { WikipediaService } from './wikipedia.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     JsonpModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ WikipediaService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
