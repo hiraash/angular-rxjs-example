@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { WikipediaService } from './wikipedia.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {}
+  items: Array<string>;
+  term: FormControl = new FormControl();
+
+  constructor( wiki: WikipediaService ) {
+
+  }
+
 }
