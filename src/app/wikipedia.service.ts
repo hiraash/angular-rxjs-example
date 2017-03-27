@@ -4,11 +4,13 @@ import { Observable } from 'rxjs/observable';
 
 @Injectable()
 export class WikipediaService {
+
   constructor( private jsonp: Jsonp ) {}
 
   search ( term, limit ): Observable<any> {
     if ( term ) {
       console.log( `Searching Wikipedia for "${term}"` );
+
       const search = new URLSearchParams();
       search.set('action', 'opensearch');
       search.set('search', term);
