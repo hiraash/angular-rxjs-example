@@ -7,6 +7,7 @@ export class WikipediaService {
   constructor( private jsonp: Jsonp ) {}
 
   search ( term, limit ): Observable<any> {
+    if ( term ) {
       console.log( `Searching Wikipedia for "${term}"` );
       const search = new URLSearchParams();
       search.set('action', 'opensearch');
@@ -16,6 +17,7 @@ export class WikipediaService {
       return this.jsonp
           .get('http://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK', { search })
           .map((response) => response.json()[1]);
+    }
   }
 
 }
