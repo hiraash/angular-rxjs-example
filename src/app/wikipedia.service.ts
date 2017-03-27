@@ -7,7 +7,7 @@ export class WikipediaService {
   constructor( private jsonp: Jsonp ) {}
 
   search ( term, limit ): Observable<any> {
-      console.log( 'Searching Wikipedia for ' + term );
+      console.log( `Searching Wikipedia for "${term}"` );
       const search = new URLSearchParams();
       search.set('action', 'opensearch');
       search.set('search', term);
